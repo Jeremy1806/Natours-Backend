@@ -1,6 +1,6 @@
-const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
+
 const app = express();
 
 const tourRoute = require('./route/tourRoutes');
@@ -11,8 +11,9 @@ app.use((req, res, next) => {
   console.log('Middleware working GOOD !!');
   next();
 });
-
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 app.use(express.json());
 
@@ -29,9 +30,4 @@ app.use('/api/v1/tours', tourRoute);
 app.use('/api/v1/users', userRoute);
 
 // Server
-
-const port = 8000;
-
-app.listen(port, () => {
-  console.log(`Listening to port: ${port}`);
-});
+module.exports = app;

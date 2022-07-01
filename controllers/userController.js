@@ -31,3 +31,11 @@ const deleteUser = (req, res) => {
     message: 'This resource link isnt ready yet',
   });
 };
+
+module.exports = {
+  getAllUsers,
+  getUser,
+  deleteUser,
+  addUser,
+  updateUser,
+};
